@@ -1,0 +1,8 @@
+// 用来演示render方法
+{
+  //npm i babel-preset-env babel-plugin-transform-vue-jsx,下载好以后，在webpack里面加上配置
+  "presets": ["env"],
+  "plugins": [
+    "transform-vue-jsx" //转化vue里面的jsx代码，因为vue支持的jsx和react支持的jsx有一定区别
+  ]
+}

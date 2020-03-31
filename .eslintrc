@@ -1,0 +1,13 @@
+{
+  "extends": ["standard"],
+  "plugins": ["html"],
+  // "rules": {
+  //   "vue/this-in-template": "off"
+  // },
+  "parser": "babel-eslint"
+  // 项目是基于webpack进行开发，代码都是经过babel处理过的，babel处理的方式中会有一些语法对于eslint不支持，使用loader去处理eslint的时候就会出现一些问题，所以一般使用webpack和eslint开发项目，都会指定parser:babel-eslint
+}
+
+//我们写的是.vue文件，里面类似于html的格式，不是标准的javascript文件，eslint没有办法直接识别vue文件里的javascript代码，所以要安装eslint-plugin-html——》识别script标签里面的javascript代码
+
+//希望每次改代码都能进行自动验证？安装eslint-loader和babel-eslint
