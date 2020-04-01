@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf dist",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.config.client.js",
     "build": "npm run clean && npm run build:client",
-    "clean": "rimraf dist",
     "lint": "eslint --ext .js --ext .jsx --ext .vue client/",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/",
     "precommit": "npm run lint",
@@ -19,13 +19,12 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "husky": "^4.2.3",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "autoprefixer": "^9.6.1",
     "babel-eslint": "^10.1.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.1.0",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "babel-preset-env": "^1.7.0",
@@ -44,6 +43,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^4.1.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^4.2.3",
     "mini-css-extract-plugin": "^0.8.0",
     "postcss": "^7.0.17",
     "postcss-loader": "^3.0.0",
@@ -56,7 +56,7 @@
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.36.1",
-    "webpack-cli": "^3.3.6",
+    "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.2"
   }

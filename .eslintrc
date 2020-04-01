@@ -1,10 +1,14 @@
 {
-  "extends": ["standard"],
+  //Adjacent JSX elements must be wrapped in an enclosing tag
+  "extends": ["standard", "plugin:vue/recommended"],
   "plugins": ["html"],
-  // "rules": {
-  //   "vue/this-in-template": "off"
-  // },
-  "parser": "babel-eslint"
+  "rules": {
+    "vue/this-in-template": "off"
+  },
+  // "parser": "babel-eslint",
+  "parserOptions": {
+    "parser": "babel-eslint"
+  }
   // 项目是基于webpack进行开发，代码都是经过babel处理过的，babel处理的方式中会有一些语法对于eslint不支持，使用loader去处理eslint的时候就会出现一些问题，所以一般使用webpack和eslint开发项目，都会指定parser:babel-eslint
 }
 

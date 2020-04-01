@@ -6,7 +6,7 @@ const ExtractPlugin = require("extract-text-webpack-plugin");
 const baseConfig = require("./webpack.config.base");
 const merge = require("webpack-merge");
 
-const isDev = process.env.NODE_ENV === "development"; //开发环境
+const isDev = process.env.NODE_ENV === "development"; // 开发环境
 
 const defaultPlugins = [
   new VueLoaderPlugin(), // vue-loader的使用都是需要伴生 VueLoaderPlugin的
@@ -34,45 +34,47 @@ let config;
 if (isDev) {
   // merge方法得到的是新的config，不会修改baseConfig
   config = merge(baseConfig, {
-    devtool: "#cheap-module-eval-source-map",
+    // devtool: "#cheap-module-eval-source-map", webpack4默认回家devtool，我们也可以指定
     module: {
-      rules: {
-        test: /\.styl(us)?$/,
-        use: [
-          // 在使用.vue文件进行开发的时候，应该使用vue-style-loader，否则无法使用热更新的功能
-          "vue-style-loader",
-          "css-loader",
-          // {
-          //   loader: "css-loader",
-          //   options: {
-          //     module: true, //开启cssModules，引入其他css文件的时候，也调用cssModules模式
-          //     localIdentName: isDev
-          //       ? "[path]-[name]-[hash:base64:5]"
-          //       : "[hash: base64: 5]"
-          //   }
-          // },
-          {
-            loader: "postcss-loader",
-            options: {
-              sourceMap: true
-            }
-          },
-          "stylus-loader"
-        ]
-      }
+      rules: [
+        {
+          test: /\.styl(us)?$/,
+          use: [
+            // 在使用.vue文件进行开发的时候，应该使用vue-style-loader，否则无法使用热更新的功能
+            "vue-style-loader",
+            "css-loader",
+            // {
+            //   loader: "css-loader",
+            //   options: {
+            //     module: true, // 开启cssModules，引入其他css文件的时候，也调用cssModules模式
+            //     localIdentName: isDev
+            //       ? "[path]-[name]-[hash:base64:5]"
+            //       : "[hash: base64: 5]"
+            //   }
+            // },
+            {
+              loader: "postcss-loader",
+              options: {
+                sourceMap: true
+              }
+            },
+            "stylus-loader"
+          ]
+        }
+      ]
     },
     devServer,
     plugins: defaultPlugins.concat([
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
+      new webpack.HotModuleReplacementPlugin()
+      // new webpack.NoEmitOnErrorsPlugin()   webpack4取消了
     ])
   });
 } else {
   config = merge(baseConfig, {
     // 后面的覆盖baseConfig里面相同的内容
     entry: {
-      app: path.join(__dirname, "../client/index.js"),
-      vender: ["vue"]
+      app: path.join(__dirname, "../client/index.js")
+      // vender: ["vue"]
     },
     output: {
       filename: "[name].[chunkhash:8].js"
@@ -97,14 +99,21 @@ if (isDev) {
         }
       ]
     },
+    optimization: {
+      splitChunks: {
+        chunks: "all" // 默认把node_modules里的代码都打包到vender里面
+      },
+      // 任意非entry里面指定的代码，放到runtime这个js里面去
+      runtimeChunk: true
+    },
     plugins: defaultPlugins.concat([
-      new ExtractPlugin("styles.[md5:contenthash:hex:8].css"),
-      new webpack.optimize.SplitChunksPlugin({
-        name: "vender"
-      }),
-      new webpack.optimize.RuntimeChunkPlugin({
-        name: "runtime"
-      })
+      new ExtractPlugin("styles.[md5:contenthash:hex:8].css")
+      // new webpack.optimize.SplitChunksPlugin({
+      //   name: "vender"
+      // }),
+      // new webpack.optimize.RuntimeChunkPlugin({
+      //   name: "runtime"
+      // })
     ])
   });
 }
