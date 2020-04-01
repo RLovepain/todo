@@ -3,7 +3,9 @@
   "extends": ["standard", "plugin:vue/recommended"],
   "plugins": ["html"],
   "rules": {
-    "vue/this-in-template": "off"
+    "vue/this-in-template": "off",
+    "no-new": "off",
+    "quotes": [1, "single"]
   },
   // "parser": "babel-eslint",
   "parserOptions": {
