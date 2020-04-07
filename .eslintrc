@@ -1,12 +1,40 @@
 {
   //Adjacent JSX elements must be wrapped in an enclosing tag
-  "extends": ["standard"], // "plugin:vue/recommended"
+  "extends": ["plugin:vue/recommended", "standard"], // "plugin:vue/recommended"
   "plugins": ["html"],
   "rules": {
     "vue/this-in-template": "off",
     "no-new": "off",
+    "comma-dangle": ["error", "never"],
     "quotes": [1, "single"],
-    "space-before-function-paren": 0
+    "space-before-function-paren": 0,
+    "no-tabs": "off",
+    "vue/html-self-closing": [
+      "error",
+      {
+        "html": {
+          "void": "never",
+          "normal": "any",
+          "component": "any"
+        },
+        "svg": "always",
+        "math": "always"
+      }
+    ],
+    "vue/max-attributes-per-line": [
+      2,
+      {
+        "singleline": 10,
+        "multiline": {
+          "max": 1,
+          "allowFirstLine": false
+        }
+      }
+    ],
+    // 在单行元素的内容前后需要换行符
+    "vue/singleline-html-element-content-newline": "off",
+    // 该规则要求插值的花括号两边有空格
+    "vue/mustache-interpolation-spacing": ["error", "always"]
   },
   // "parser": "babel-eslint",
   "parserOptions": {

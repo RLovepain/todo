@@ -6,10 +6,11 @@
       class="toggle"
     >
     <label for>{{ todo.content }}</label>
-    <button
+    <input
+      type="button"
       class="destory"
       @click="deleteTodo"
-    />
+    >
   </div>
 </template>
 
@@ -22,7 +23,7 @@ export default {
     }
   },
   methods: {
-    deleteTodo () {
+    deleteTodo() {
       this.$emit('del', this.todo.id)
     }
   }

@@ -4,5 +4,7 @@
   "presets": ["@babel/preset-env"],
   "plugins": [
     "transform-vue-jsx" //转化vue里面的jsx代码，因为vue支持的jsx和react支持的jsx有一定区别
+    // npm i babel-plugin-syntax-dynamic-import -D  用以解析识别import()动态导入语法---并非转换，而是解析识别。但是该项目中不需要使用，使用异步组件不会报错,import语法不报错
+    // "syntax-dynamic-import"
   ]
 }
